@@ -76,22 +76,23 @@
         <!-- Reads metadata from a URL and store a backup copy on the file system. -->
         <!-- Validates the signature of the metadata and filters out all by SP entities in order to save memory -->
         <!-- To use: fill in 'metadataURL' and 'backingFile' properties on MetadataResource element -->
-        <!--
+        
         <metadata:MetadataProvider id="URLMD" xsi:type="metadata:FileBackedHTTPMetadataProvider"
-                          metadataURL="http://example.org/metadata.xml"
-                          backingFile="$IDP_HOME$/metadata/some-metadata.xml">
+                          metadataURL="http://www.testshib.org/metadata/testshib-providers.xml"
+                          backingFile="$IDP_HOME$/metadata/testshib-metadata.xml">
+            <!--
             <metadata:MetadataFilter xsi:type="metadata:ChainingFilter">
                 <metadata:MetadataFilter xsi:type="metadata:RequiredValidUntil" 
                                 maxValidityInterval="P7D" />
                 <metadata:MetadataFilter xsi:type="metadata:SignatureValidation"
                                 trustEngineRef="shibboleth.MetadataTrustEngine"
                                 requireSignedMetadata="true" />
-	            <metadata:MetadataFilter xsi:type="metadata:EntityRoleWhiteList">
+                <metadata:MetadataFilter xsi:type="metadata:EntityRoleWhiteList">
                     <metadata:RetainedRole>samlmd:SPSSODescriptor</metadata:RetainedRole>
                 </metadata:MetadataFilter>
             </metadata:MetadataFilter>
+            -->
         </metadata:MetadataProvider>
-        -->
         
     </metadata:MetadataProvider>
 

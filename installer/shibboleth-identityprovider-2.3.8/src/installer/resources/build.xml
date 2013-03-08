@@ -91,6 +91,7 @@
                     <filterset begintoken="$" endtoken="$">
                         <filter token="IDP_HOME" value="${idp.home.path}"/>
                         <filter token="IDP_VERSION" value="${version}"/>
+                        <filter token="IDP_LOG_LEVEL" value="${idp.logging.level}" />
                     </filterset>
                 </copy>
 
@@ -198,6 +199,7 @@
         <copy file="${idp.web.xml.name}" todir="${installer.dir}" preservelastmodified="true" overwrite="true">
             <filterset begintoken="$" endtoken="$">
                 <filter token="IDP_HOME" value="${idp.home.url}"/>
+                <filter token="IDP_HOSTNAME" value="${idp.hostname}"/>
             </filterset>
         </copy>
 

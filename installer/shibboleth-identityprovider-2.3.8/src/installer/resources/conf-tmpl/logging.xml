@@ -6,7 +6,7 @@
         Levels: OFF, ERROR, WARN, INFO, DEBUG, TRACE, ALL
     -->
     <!-- Logs IdP, but not OpenSAML, messages -->
-    <logger name="edu.internet2.middleware.shibboleth" level="INFO"/>
+    <logger name="edu.internet2.middleware.shibboleth" level="$IDP_LOG_LEVEL$"/>
 
     <!-- Logs OpenSAML, but not IdP, messages -->
     <logger name="org.opensaml" level="WARN"/>

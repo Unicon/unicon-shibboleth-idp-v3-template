@@ -82,7 +82,7 @@
         <url-pattern>/AuthnEngine</url-pattern>
     </servlet-mapping>
 
-    <!-- Servlet protected by container used for RemoteUser authentication -->
+    <!-- Servlet protected by container used for RemoteUser authentication 
     <servlet>
         <servlet-name>RemoteUserAuthHandler</servlet-name>
         <servlet-class>edu.internet2.middleware.shibboleth.idp.authn.provider.RemoteUserAuthServlet</servlet-class>
@@ -93,8 +93,10 @@
         <servlet-name>RemoteUserAuthHandler</servlet-name>
         <url-pattern>/Authn/RemoteUser</url-pattern>
     </servlet-mapping>
+    -->
 
     <!-- Servlet for doing Username/Password authentication -->
+    <!--
     <servlet>
         <servlet-name>UsernamePasswordAuthHandler</servlet-name>
         <servlet-class>edu.internet2.middleware.shibboleth.idp.authn.provider.UsernamePasswordLoginServlet</servlet-class>
@@ -105,6 +107,42 @@
         <servlet-name>UsernamePasswordAuthHandler</servlet-name>
         <url-pattern>/Authn/UserPassword</url-pattern>
     </servlet-mapping>
+    -->
+
+    <!-- Using Shib-CAS authenticator bridge for extenal authentication -->
+    <servlet>
+       <servlet-name>External Authn</servlet-name>
+       <servlet-class>net.unicon.idp.externalauth.CasInvokerServlet</servlet-class>
+       <init-param>
+           <param-name>casProtectedResource</param-name>
+           <param-value>https://$IDP_HOSTNAME$/casauth/facade</param-value>
+       </init-param>
+       <!-- Am IdP URL for the external CAS-protected resource to callback to -->
+       <init-param>
+           <param-name>postAuthnCallbackUrl</param-name>
+           <param-value>https://$IDP_HOSTNAME$/idp/externalAuthnCallback</param-value>
+       </init-param>
+
+       <load-on-startup>2</load-on-startup>
+   </servlet>
+
+   <servlet-mapping>
+       <servlet-name>External Authn</servlet-name>
+       <url-pattern>/authn/external</url-pattern>
+   </servlet-mapping>
+
+   <!-- Servlet for receiving a callback from an external authentication system and continuing the IdP login flow -->
+   <servlet>
+       <servlet-name>External Authn Callback</servlet-name>
+       <servlet-class>net.unicon.idp.externalauth.CasCallbackServlet</servlet-class>
+
+       <load-on-startup>2</load-on-startup>
+   </servlet>
+
+   <servlet-mapping>
+       <servlet-name>External Authn Callback</servlet-name>
+       <url-pattern>/externalAuthnCallback</url-pattern>
+   </servlet-mapping>
 
     <!-- Servlet for displaying IdP status. -->
     <servlet>
