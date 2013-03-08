@@ -15,7 +15,7 @@ The current version of the Identity Provider used is `2.3.8`.
 
 #Configuration
 The build is controlled by the [`install.properties`](https://github.com/Unicon/unicon-shibboleth-idp-template/blob/master/installer/2.3.8/src/installer/resources/install.properties)
-. Adjust the following settings based on your environment:
+file. Adjust the following settings based on your environment:
 
 ```
 idp.home=/shibboleth/shibboleth-idp
