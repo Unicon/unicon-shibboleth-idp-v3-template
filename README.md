@@ -14,7 +14,8 @@ The current version of the Identity Provider used is `2.3.8`.
 - Ensure you have sufficient permissions to execute the build and deploy artifacts to `$CATALINA_HOME`
 
 #Configuration
-The build is controlled by the `install.properties`. Adjust the following settings based on your environment:
+The build is controlled by the [`install.properties`](https://github.com/Unicon/unicon-shibboleth-idp-template/blob/master/installer/2.3.8/src/installer/resources/install.properties)
+. Adjust the following settings based on your environment:
 
 ```
 idp.home=/shibboleth/shibboleth-idp
