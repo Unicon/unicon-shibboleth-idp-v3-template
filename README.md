@@ -1,7 +1,12 @@
 Unicon Shibboleth Identity Provider Template
 ==============================
 
-A template for installing the Shibboleth Identity Provider v2.3.8 which uses thr Shib-CAS-Authenticator plugin for external SSO authentication. The shibboleth installer is preconfigured and decorated with additional tasks that would provide a fully functional identity provider ready for deployment. 
+A template for installing the [Shibboleth Identity Provider](https://wiki.shibboleth.net/confluence/display/SHIB2/IdPInstall)
+which uses the [Shib-CAS-Authenticator plugin](https://github.com/Unicon/shib-cas-authenticator) 
+for external SSO authentication. The shibboleth installer is preconfigured and decorated with additional tasks 
+that would provide a fully functional identity provider ready for deployment. 
+
+The current version of the Identity Provider used is `2.3.8`.
 
 #Requirements
 - Ensure you have set the `CATALINA_HOME` environment variable
@@ -19,16 +24,14 @@ idp.logging.level=DEBUG
 ```
 
 ## Sample Service Provider
-The build is configured to use the test SP service in its metadata. You should be able to test the functionality by registering your Identity Provider metadata with the test SP service. Follow the instructions here.
+The build is configured to use the test SP service in its metadata. You should be able to test the 
+functionality by [registering your Identity Provider metadata](https://www.testshib.org/metadata.html)
+with the test SP service. 
 
 #Build
 
 * To install the IdP and create the `idp.war` file, execute: `install`
 * To install the CAS authenticator bridge, execute: `install bridge`
 * To install the IdP web fragment, execute: `install fragment`
-* To see a list of targets available, execute: `install -projecthelp`
 * If you wish to combine all above tasks into one, simply execute: `install all`
-
-#Run
-
-Simply restart your web container.
+* To see a list of targets available, execute: `install -projecthelp`
