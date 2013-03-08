@@ -1,7 +1,7 @@
 Unicon Shibboleth Identity Provider Template
 ==============================
 
-A template for installing the Shibboleth Identity Provider which uses thr Shib-CAS-Authenticator plugin for external SSO authentication. The shibboleth installer is preconfigured and decorated with additional tasks that would provide a fully functional identity provider ready for deployment. 
+A template for installing the Shibboleth Identity Provider v2.3.8 which uses thr Shib-CAS-Authenticator plugin for external SSO authentication. The shibboleth installer is preconfigured and decorated with additional tasks that would provide a fully functional identity provider ready for deployment. 
 
 #Requirements
 - Ensure you have set the `CATALINA_HOME` environment variable
