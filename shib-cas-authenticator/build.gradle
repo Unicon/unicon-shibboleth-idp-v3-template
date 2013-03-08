@@ -1,0 +1,33 @@
+apply plugin: 'idea'
+defaultTasks 'clean', 'build'
+
+allprojects {
+
+    apply plugin: 'java'
+    //apply plugin: 'idea'
+
+    group = 'net.unicon'
+
+    sourceCompatibility = 1.6
+    version = project.version
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        testCompile group: 'junit', name: 'junit', version: project.junitVersion
+    }
+
+    idea.project.ipr {
+        beforeMerged { project ->
+            project.modulePaths.clear()
+        }
+    }
+}
+
+
+
+task wrapper(type: Wrapper) {
+    gradleVersion = project.gradleVersion
+}
