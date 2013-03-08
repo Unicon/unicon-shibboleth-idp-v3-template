@@ -1,0 +1,6 @@
+<Context docBase="/unicon-shibboleth-idp-template/shibboleth-idp/war/idp.war"
+         privileged="true"
+         antiResourceLocking="false"
+         antiJARLocking="false"
+         unpackWAR="false"
+         swallowOutput="true" />

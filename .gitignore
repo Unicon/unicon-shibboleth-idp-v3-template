@@ -4,3 +4,11 @@
 *.jar
 *.war
 *.ear
+
+shib-cas-authenticator/build/
+shib-cas-authenticator/idp-cas-invoker/build
+shib-cas-authenticator/idp-cas-invoker/build
+shib-cas-authenticator/cas-authentication-facade/build/
+shib-cas-authenticator/.gradle
+shibboleth-idp/logs
+shibboleth-idp/credentials

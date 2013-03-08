@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:shibmd="urn:mace:shibboleth:metadata:1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" entityID="https://shib-stg.byu.edu/idp/shibboleth">
+
+    <IDPSSODescriptor protocolSupportEnumeration="urn:mace:shibboleth:1.0 urn:oasis:names:tc:SAML:1.1:protocol urn:oasis:names:tc:SAML:2.0:protocol">
+
+        <Extensions>
+            <shibmd:Scope regexp="false">byu.edu</shibmd:Scope>
+        </Extensions>
+
+        <KeyDescriptor>
+            <ds:KeyInfo>
+                <ds:X509Data>
+                    <ds:X509Certificate>
+MIIDKzCCAhOgAwIBAgIUTE6AMHubNbeScxAPlWb+cg5+pmEwDQYJKoZIhvcNAQEF
+BQAwGzEZMBcGA1UEAxMQc2hpYi1zdGcuYnl1LmVkdTAeFw0xMzAzMDYyMDI4NTda
+Fw0zMzAzMDYyMDI4NTdaMBsxGTAXBgNVBAMTEHNoaWItc3RnLmJ5dS5lZHUwggEi
+MA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCyRZH9FY/VWuXlYPyG0agxLHvt
+Sy54Z1m+x8BJCIJ3wa55ecrhAukTstQByFz813kXWbOADXKGFkaJ3+g815hM6uPe
+6gPrtH31IG9LdFb3CsStHsQ/9tno5z7ce+DXkj27BDiDaGVhrWQgt1gKBDAmU3tL
+PnzfaOnELUprEJtfUfVFBrerTj+bhm42M/xIVUTkyoTwBQVMPeCCcwk5okqo6TK1
+0WfTwNDePk6dOosCrAbS1XRz33mqPZ2YkFRQgL/zhAKbUwKPyBv8ASCtUC4dUn3p
+ObNRugVZjWSrxIyHB8cbuV208a/viAgQzKYllzI+8DXjGGnYlUNG4RmvxnRDAgMB
+AAGjZzBlMEQGA1UdEQQ9MDuCEHNoaWItc3RnLmJ5dS5lZHWGJ2h0dHBzOi8vc2hp
+Yi1zdGcuYnl1LmVkdS9pZHAvc2hpYmJvbGV0aDAdBgNVHQ4EFgQUTVPSzKQwa5pi
+aS33O9w+m0xhPl0wDQYJKoZIhvcNAQEFBQADggEBAIAeK86Xio+ByMd9AP51fZky
+Qr4K1f/7VDreog9cs7QicbunrenhMHTCjk/xwz2TmdjP387NpRjkH+YC2R+NklrQ
+Lk0OKSzYiBWJRnQ+cG0o2gEWZZeEKyA87reU57unECyp70/NNwb6svwLwNezV4gh
+8NS5Dz2Xn5CJVacrpic73zsZ7IAcnZjpSRPUjQGZLM6EvFiTtuooX8ofbX2DTMvt
+SIpaMPo++xAqPn+xuCYt029xfU6rcQpQUW1Fq4HDCs1Ytc/raI/R5hfemqvlYw7c
+yHY8P4uCOLLOJQOKORrQK3z5djBnBI8H3xx0FnAd3NFldxWfbrHo1SatEQ14k4I=
+
+                    </ds:X509Certificate>
+                </ds:X509Data>
+            </ds:KeyInfo>
+        </KeyDescriptor>
+        
+        <ArtifactResolutionService Binding="urn:oasis:names:tc:SAML:1.0:bindings:SOAP-binding" Location="https://shib-stg.byu.edu:8443/idp/profile/SAML1/SOAP/ArtifactResolution" index="1"/>
+
+        <ArtifactResolutionService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://shib-stg.byu.edu:8443/idp/profile/SAML2/SOAP/ArtifactResolution" index="2"/>
+                                   
+        <NameIDFormat>urn:mace:shibboleth:1.0:nameIdentifier</NameIDFormat>
+        <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+
+        <SingleSignOnService Binding="urn:mace:shibboleth:1.0:profiles:AuthnRequest" Location="https://shib-stg.byu.edu/idp/profile/Shibboleth/SSO"/>
+        
+        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://shib-stg.byu.edu/idp/profile/SAML2/POST/SSO"/>
+
+        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST-SimpleSign" Location="https://shib-stg.byu.edu/idp/profile/SAML2/POST-SimpleSign/SSO"/>
+        
+        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://shib-stg.byu.edu/idp/profile/SAML2/Redirect/SSO"/>
+    </IDPSSODescriptor>
+
+    <AttributeAuthorityDescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:1.1:protocol urn:oasis:names:tc:SAML:2.0:protocol">
+
+        <Extensions>
+            <shibmd:Scope regexp="false">byu.edu</shibmd:Scope>
+        </Extensions>
+
+        <KeyDescriptor>
+            <ds:KeyInfo>
+                <ds:X509Data>
+                    <ds:X509Certificate>
+MIIDKzCCAhOgAwIBAgIUTE6AMHubNbeScxAPlWb+cg5+pmEwDQYJKoZIhvcNAQEF
+BQAwGzEZMBcGA1UEAxMQc2hpYi1zdGcuYnl1LmVkdTAeFw0xMzAzMDYyMDI4NTda
+Fw0zMzAzMDYyMDI4NTdaMBsxGTAXBgNVBAMTEHNoaWItc3RnLmJ5dS5lZHUwggEi
+MA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCyRZH9FY/VWuXlYPyG0agxLHvt
+Sy54Z1m+x8BJCIJ3wa55ecrhAukTstQByFz813kXWbOADXKGFkaJ3+g815hM6uPe
+6gPrtH31IG9LdFb3CsStHsQ/9tno5z7ce+DXkj27BDiDaGVhrWQgt1gKBDAmU3tL
+PnzfaOnELUprEJtfUfVFBrerTj+bhm42M/xIVUTkyoTwBQVMPeCCcwk5okqo6TK1
+0WfTwNDePk6dOosCrAbS1XRz33mqPZ2YkFRQgL/zhAKbUwKPyBv8ASCtUC4dUn3p
+ObNRugVZjWSrxIyHB8cbuV208a/viAgQzKYllzI+8DXjGGnYlUNG4RmvxnRDAgMB
+AAGjZzBlMEQGA1UdEQQ9MDuCEHNoaWItc3RnLmJ5dS5lZHWGJ2h0dHBzOi8vc2hp
+Yi1zdGcuYnl1LmVkdS9pZHAvc2hpYmJvbGV0aDAdBgNVHQ4EFgQUTVPSzKQwa5pi
+aS33O9w+m0xhPl0wDQYJKoZIhvcNAQEFBQADggEBAIAeK86Xio+ByMd9AP51fZky
+Qr4K1f/7VDreog9cs7QicbunrenhMHTCjk/xwz2TmdjP387NpRjkH+YC2R+NklrQ
+Lk0OKSzYiBWJRnQ+cG0o2gEWZZeEKyA87reU57unECyp70/NNwb6svwLwNezV4gh
+8NS5Dz2Xn5CJVacrpic73zsZ7IAcnZjpSRPUjQGZLM6EvFiTtuooX8ofbX2DTMvt
+SIpaMPo++xAqPn+xuCYt029xfU6rcQpQUW1Fq4HDCs1Ytc/raI/R5hfemqvlYw7c
+yHY8P4uCOLLOJQOKORrQK3z5djBnBI8H3xx0FnAd3NFldxWfbrHo1SatEQ14k4I=
+
+                    </ds:X509Certificate>
+                </ds:X509Data>
+            </ds:KeyInfo>
+        </KeyDescriptor>
+
+        <AttributeService Binding="urn:oasis:names:tc:SAML:1.0:bindings:SOAP-binding" Location="https://shib-stg.byu.edu:8443/idp/profile/SAML1/SOAP/AttributeQuery"/>
+        
+        <AttributeService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://shib-stg.byu.edu:8443/idp/profile/SAML2/SOAP/AttributeQuery"/>
+        
+        <NameIDFormat>urn:mace:shibboleth:1.0:nameIdentifier</NameIDFormat>
+        <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+        
+    </AttributeAuthorityDescriptor>
+    
+</EntityDescriptor>
