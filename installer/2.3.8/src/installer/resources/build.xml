@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Shibboleth Identity Provider" basedir="../../.." default="install">
 
+    <!-- Load property from the environment -->
+    <property environment="env"/>
+
     <property name="installer.dir" value="${basedir}/src/installer"/>
     <property name="resources.dir" value="${installer.dir}/resources"/>
     <property name="tools.dir" value="${basedir}/src/tools"/>
     <property name="webapp.dir" value="${basedir}/src/main/webapp"/>
     <property name="shib.cas.dir" value="${basedir}/../../shib-cas-authenticator" />
-
+    <property name="idp.fragment.path" value="${env.CATALINA_HOME}/conf/Catalina/localhost" />
     <property name="idp.casinvoker.libs" value="${shib.cas.dir}/idp-cas-invoker/build/libs" />    
     <property name="facade.web.xml" value="${shib.cas.dir}/cas-authentication-facade/src/main/webapp/WEB-INF/web.xml" />
     <property name="facade.war.file" value="${shib.cas.dir}/cas-authentication-facade/build/libs/casauth.war" />
 
     <property name="war.name" value="idp"/>
 	
-    <!-- Load property from the environment -->
-    <property environment="env"/>
-
     <!-- Installation specific property file -->
     <property file="${resources.dir}/install.properties"/>
 	
@@ -24,6 +24,16 @@
 
     <!-- Load Internet2 ant extensions -->
     <taskdef resource="edu/internet2/middleware/ant/antlib.xml"/>
+
+    <target name="cleanLogs">
+        <pathToAbsolutePath path="${idp.home}" addproperty="idp.home.path"/>
+        <delete>
+            <fileset dir="${env.CATALINA_HOME}/logs" includes="**/*.*"/>
+        </delete>
+        <delete>
+            <fileset dir="${idp.home.path}/logs" includes="**/*.*"/>
+        </delete>
+    </target>
 
     <target name="install" description="Installs the identity provider software." depends="bridge">
     	
@@ -188,12 +198,8 @@
     	<delete>
     	    <fileset dir="${idp.home.path}/lib" includes="**/*.jar"/>
         </delete>
-        <delete>
-            <fileset dir="${env.CATALINA_HOME}/logs" includes="**/*.log"/>
-        </delete>
-        <delete>
-            <fileset dir="${idp.home.path}/logs" includes="**/*.*"/>
-        </delete>
+        <antcall target="cleanLogs" />
+
         <copy todir="${idp.home.path}/lib" preservelastmodified="true" overwrite="true">
             <fileset dir="${basedir}/lib"/>
             <fileset dir="${idp.casinvoker.libs}" />
@@ -226,8 +232,6 @@
 
     <target name="bridge" description="Deploys the shib-cas authenticator">
         <echo message="Preparing web.xml for the bridge based on installer settings..." />
-
-
 
         <echo>Prepared the facase web.xml file at facade.web.xml ${facade.web.xml}</echo>
         <echo>The facade war file will be generated at ${facade.war.file}</echo>
@@ -277,17 +281,20 @@
 
     <target name="fragment" description="Deploys the IdP's web fragment file...">
         <echo message="Preparing web.xml for the bridge based on installer settings..." />
-        <copy todir="${env.CATALINA_HOME}/conf/Catalina/localhost" preservelastmodified="true" overwrite="true"
+        <pathToAbsolutePath path="${idp.home}" addproperty="idp.home.path"/>
+        <copy todir="${idp.fragment.path}" preservelastmodified="true" overwrite="true"
               file="${basedir}/../etc/idp.xml">
+            
             <filterset begintoken="$" endtoken="$">
-                <filter token="IDP_HOME" value="${idp.home}"/>
+                <filter token="IDP_HOME" value="${idp.home.path}"/>
             </filterset>
+            
         </copy>
+        <replace file="${idp.fragment.path}/idp.xml" token="\" value="/"/>
     </target>
 
     <target name="all" description="Install idp, bridge and fragment">
         <antcall target="install" />
-        <antcall target="bridge" />
         <antcall target="fragment" />
     </target>
 
