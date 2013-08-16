@@ -75,7 +75,7 @@
                 <mkdir dir="${idp.home.path}/conf"/>
                 <mkdir dir="${idp.home.path}/credentials"/>
                 <mkdir dir="${idp.home.path}/lib"/>
-                <mkdir dir="${idp.home.path}/lib/endorsed"/>
+               
                 <mkdir dir="${idp.home.path}/logs"/>
                 <mkdir dir="${idp.home.path}/metadata"/>
                 <mkdir dir="${idp.home.path}/war"/>
@@ -204,7 +204,7 @@
             <fileset dir="${basedir}/lib"/>
             <fileset dir="${idp.casinvoker.libs}" />
         </copy>
-        <copy todir="${idp.home.path}/lib/endorsed" preservelastmodified="true" failonerror="false" overwrite="true">
+        <copy todir="${env.CATALINA_HOME}/endorsed" preservelastmodified="true" failonerror="false" overwrite="true">
             <fileset dir="endorsed"/>
         </copy>
 
