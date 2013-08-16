@@ -11,17 +11,17 @@
 
     <context-param>
         <param-name>serverName</param-name>
-        <param-value>https://shib-stg.byu.edu</param-value>
+        <param-value>https://$IDP_HOSTNAME$</param-value>
     </context-param>
 
     <context-param>
         <param-name>casServerLoginUrl</param-name>
-        <param-value>https://cas-stg.byu.edu/cas/login</param-value>
+        <param-value>https://$CAS_HOSTNAME$/cas/login</param-value>
     </context-param>
 
     <context-param>
         <param-name>casServerUrlPrefix</param-name>
-        <param-value>https://cas-stg.byu.edu/cas</param-value>
+        <param-value>https://$CAS_HOSTNAME$/cas</param-value>
     </context-param>
 
     <context-param>

@@ -7,6 +7,10 @@
     <property name="webapp.dir" value="${basedir}/src/main/webapp"/>
     <property name="shib.cas.dir" value="${basedir}/../../shib-cas-authenticator" />
 
+    <property name="idp.casinvoker.libs" value="${shib.cas.dir}/idp-cas-invoker/build/libs" />    
+    <property name="facade.web.xml" value="${shib.cas.dir}/cas-authentication-facade/src/main/webapp/WEB-INF/web.xml" />
+    <property name="facade.war.file" value="${shib.cas.dir}/cas-authentication-facade/build/libs/casauth.war" />
+
     <property name="war.name" value="idp"/>
 	
     <!-- Load property from the environment -->
@@ -21,7 +25,7 @@
     <!-- Load Internet2 ant extensions -->
     <taskdef resource="edu/internet2/middleware/ant/antlib.xml"/>
 
-    <target name="install" description="Installs the identity provider software.">
+    <target name="install" description="Installs the identity provider software." depends="bridge">
     	
     	<echo message="!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"/>
     	<echo message="Be sure you have read the installation/upgrade instructions on the Shibboleth website before proceeding."/>
@@ -192,6 +196,7 @@
         </delete>
         <copy todir="${idp.home.path}/lib" preservelastmodified="true" overwrite="true">
             <fileset dir="${basedir}/lib"/>
+            <fileset dir="${idp.casinvoker.libs}" />
         </copy>
         <copy todir="${idp.home.path}/lib/endorsed" preservelastmodified="true" failonerror="false" overwrite="true">
             <fileset dir="endorsed"/>
@@ -207,7 +212,7 @@
 
         <!-- build the war file -->
         <war warfile="${installer.dir}/${war.name}.war" webxml="${installer.dir}/web.xml">
-            <lib dir="${basedir}/lib" excludes="servlet-api*.jar,jsp-api*.jar"/>
+            <lib dir="${idp.home.path}/lib" excludes="servlet-api*.jar,jsp-api*.jar"/>
             <webinf dir="${webapp.dir}/WEB-INF" excludes="web.xml"/>
             <fileset dir="${webapp.dir}" excludes="WEB-INF/**"/>
         </war>
@@ -221,8 +226,11 @@
 
     <target name="bridge" description="Deploys the shib-cas authenticator">
         <echo message="Preparing web.xml for the bridge based on installer settings..." />
-        <property name="facade.web.xml" value="${shib.cas.dir}/cas-authentication-facade/src/main/webapp/WEB-INF/web.xml" />
-        <property name="facade.war.file" value="${shib.cas.dir}/cas-authentication-facade/build/libs/casauth.war" />
+
+
+
+        <echo>Prepared the facase web.xml file at facade.web.xml ${facade.web.xml}</echo>
+        <echo>The facade war file will be generated at ${facade.war.file}</echo>
 
         <delete file="${facade.web.xml}" />
         <delete file="${facade.war.file}" />
@@ -235,6 +243,16 @@
             </filterset>
         </copy>
 
+        <pathToAbsolutePath path="${idp.home}" addproperty="idp.home.path"/>
+
+        <copy tofile="${shib.cas.dir}/gradle.properties" preservelastmodified="true" overwrite="true"
+              file="${shib.cas.dir}/gradle.sample.properties">
+            <filterset begintoken="$" endtoken="$">
+                <filter token="IDP_HOME" value="${idp.home.path}"/>
+            </filterset>
+        </copy>
+        <replace file="${shib.cas.dir}/gradle.properties" token="\" value="/"/>
+
         <echo message="Cleaning up lingering artifacts from last deployment..." />
         <delete dir="${env.CATALINA_HOME}/webapp/casauth" />
         <delete file="${env.CATALINA_HOME}/webapp/casauth.war" />
@@ -243,7 +261,7 @@
             <os family="windows" />
         </condition>
        
-        <echo message="Launching gradle build..." />
+        <echo message="Launching gradle build at ${shib.cas.dir}/${gradlew}..." />
         <chmod file="${shib.cas.dir}/*.sh" perm="+x"/>
         <chmod file="${shib.cas.dir}/*.bat" perm="+x"/>
 
@@ -251,8 +269,9 @@
 
         <echo message="Deploying the final casauth.war file..." />
         <copy file="${facade.war.file}" todir="${env.CATALINA_HOME}/webapps" overwrite="true" />
-
+        
         <delete file="${facade.web.xml}" />
+        <delete file="${shib.cas.dir}/gradle.properties" />
         <echo message="Shib-CAS authenticator has been successfully deployed to ${env.CATALINA_HOME}\webapps" />
     </target>
 
