@@ -31,6 +31,7 @@ functionality by [registering your Identity Provider metadata](https://www.tests
 with the test SP service. 
 
 #Build
+Navigate to the `installer\2.3.8\` directory:
 
 * To install the IdP and create the `idp.war` file, execute: `install`
 * To install the CAS authenticator bridge, execute: `install bridge`
