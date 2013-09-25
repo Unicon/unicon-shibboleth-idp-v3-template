@@ -4,7 +4,9 @@
     <!-- Load property from the environment -->
     <property environment="env"/>
 
-    <property name="installer.dir" value="${basedir}/src/installer"/>
+    <property name="installer.home" value="${basedir}"/>
+    <property name="installer.dir" value="${installer.home}/src/installer"/>
+    
     <property name="resources.dir" value="${installer.dir}/resources"/>
     <property name="tools.dir" value="${basedir}/src/tools"/>
     <property name="webapp.dir" value="${basedir}/src/main/webapp"/>
@@ -13,9 +15,28 @@
     <property name="idp.casinvoker.libs" value="${shib.cas.dir}/idp-cas-invoker/build/libs" />    
     <property name="facade.web.xml" value="${shib.cas.dir}/cas-authentication-facade/src/main/webapp/WEB-INF/web.xml" />
     <property name="facade.war.file" value="${shib.cas.dir}/cas-authentication-facade/build/libs/casauth.war" />
-
     <property name="war.name" value="idp"/>
 	
+    <echo message=" "/>
+    <echo message="!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"/>
+    <echo message="Review the following build settings"/>
+    <echo message="!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"/>
+
+    <echo message=" "/>
+    <echo message="installer.home: ${installer.home}" />
+    <echo message="installer.dir: ${installer.dir}" />
+    <echo message="resources.dir: ${resources.dir}" />
+    <echo message="tools.dir: ${tools.dir}" />
+    <echo message="webapp.dir: ${webapp.dir}" />
+    <echo message="shib.cas.dir: ${shib.cas.dir}" />
+    <echo message="idp.fragment.path: ${idp.fragment.path}" />
+    <echo message="idp.casinvoker.libs: ${idp.casinvoker.libs}" />
+    <echo message="facade.web.xml: ${facade.web.xml}" />
+    <echo message="facade.war.file: ${facade.war.file}" />
+    <echo message=" "/>
+
+    <input message="Press any key to contrinue..."/>
+
     <!-- Installation specific property file -->
     <property file="${resources.dir}/install.properties"/>
 	
@@ -248,11 +269,12 @@
         </copy>
 
         <pathToAbsolutePath path="${idp.home}" addproperty="idp.home.path"/>
+        <echo message="Idp installer home directory is ${installer.home}" />
 
         <copy tofile="${shib.cas.dir}/gradle.properties" preservelastmodified="true" overwrite="true"
               file="${shib.cas.dir}/gradle.sample.properties">
             <filterset begintoken="$" endtoken="$">
-                <filter token="IDP_HOME" value="${idp.home.path}"/>
+                <filter token="IDP_INSTALLER_HOME" value="${installer.home}"/>
             </filterset>
         </copy>
         <replace file="${shib.cas.dir}/gradle.properties" token="\" value="/"/>
