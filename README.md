@@ -36,7 +36,7 @@ idp.logging.level=DEBUG
 The build is configured to use the test SP service in its metadata. You should be able to test the functionality by [registering your Identity Provider metadata](https://www.testshib.org/metadata.html) with the test SP service. 
 
 # Build
-Navigate to the `installer\${shibIdpVersio}\` directory:
+Navigate to the `installer\${shibIdpVersion}\` directory:
 
 * To install the IdP and create the `idp.war` file, execute: `install` (depends on `bridge` too)
 * To install the CAS authenticator bridge, execute: `install bridge`
