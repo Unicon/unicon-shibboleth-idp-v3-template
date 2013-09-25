@@ -35,7 +35,7 @@
     <echo message="facade.war.file: ${facade.war.file}" />
     <echo message=" "/>
 
-    <input message="Press any key to contrinue..."/>
+    <input message="Press ENTER to contrinue..."/>
 
     <!-- Installation specific property file -->
     <property file="${resources.dir}/install.properties"/>
