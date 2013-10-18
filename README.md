@@ -35,7 +35,7 @@ idp.logging.level=DEBUG
 ## Sample Service Provider
 The build is configured to use the test SP service in its metadata. You should be able to test the functionality by [registering your Identity Provider metadata](https://www.testshib.org/metadata.html) with the test SP service. 
 
-# Build [![Build Status](https://travis-ci.org/Unicon/unicon-shibboleth-idp-template.png)](https://travis-ci.org/Unicon/unicon-shibboleth-idp-template)
+# Build
 Navigate to the `installer\${shibIdpVersion}\` directory:
 
 * To install the IdP and create the `idp.war` file, execute: `install` (depends on `bridge` too)
