@@ -7,7 +7,7 @@
 <html>
 
 <body>
-	<img src="<%= request.getContextPath() %>/images/logo.jpg" />
+	<img src="<%= request.getContextPath()%>/images/dummylogo.png" alt="Replace or remove this logo"/>
 	<h3>ERROR</h3>
 	<%
 	if (error != null) {

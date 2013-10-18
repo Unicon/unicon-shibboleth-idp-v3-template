@@ -3,7 +3,7 @@
 
     <display-name>Shibboleth Identity Provider</display-name>
 
-    <!-- Parameter that allows the domain of all cookies to be explicitly set. If not set the domain is let empty which means 
+    <!-- Parameter that allows the domain of all cookies to be explicitly set. If not set the domain is left empty which means 
         that the cookie will only ever be sent to the IdP host. -->
     <!-- <context-param> <param-name>cookieDomain</param-name> <param-value>example.org</param-value> </context-param> -->
 

@@ -12,7 +12,11 @@
     <name>serviceName</name>
     <tag-class>edu.internet2.middleware.shibboleth.idp.ui.ServiceNameTag</tag-class>
     <body-content>empty</body-content>
-    
+    <attribute>
+      <name>defaultValue</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
   </tag>
   
   <tag>
@@ -55,7 +59,7 @@
   </tag>
   
   <tag>
-    <description>Service PrivacyURL - directly from the metadata if present</description>
+    <description>Service Privacy URL - directly from the metadata if present</description>
     <name>servicePrivacyURL</name>
     <tag-class>edu.internet2.middleware.shibboleth.idp.ui.ServicePrivacyURLTag</tag-class>
     <body-content>scriptless</body-content>
@@ -154,5 +158,46 @@
       <rtexprvalue>true</rtexprvalue>
     </attribute>
   </tag>
-  
+
+  <tag>
+    <description>Service Organization Name - directly from the metadata if present</description>
+    <name>organizationName</name>
+    <tag-class>edu.internet2.middleware.shibboleth.idp.ui.OrganizationNameTag</tag-class>
+    <body-content>scriptless</body-content>
+  </tag>
+
+  <tag>
+    <description>Service Organization Display Name - directly from the metadata if present</description>
+    <name>organizationDisplayName</name>
+    <tag-class>edu.internet2.middleware.shibboleth.idp.ui.OrganizationDisplayNameTag</tag-class>
+    <body-content>scriptless</body-content>
+  </tag>
+
+  <tag>
+    <description>Service Organization URL - directly from the metadata if present</description>
+    <name>organizationURL</name>
+    <tag-class>edu.internet2.middleware.shibboleth.idp.ui.OrganizationURLTag</tag-class>
+    <body-content>scriptless</body-content>
+    <attribute>
+      <name>linkText</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>cssId</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>cssClass</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>cssStyle</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
 </taglib>
