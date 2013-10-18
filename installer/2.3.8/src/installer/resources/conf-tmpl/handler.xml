@@ -68,6 +68,40 @@
         <ph:RequestPath>/SAML2/SOAP/ECP</ph:RequestPath>
     </ph:ProfileHandler>
 
+     <ph:ProfileHandler xsi:type="ph:SAML2SLO" inboundBinding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+                       outboundBindingEnumeration="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect
+                                                   urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST-SimpleSign
+                                                   urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST
+                                                   urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact">
+        <ph:RequestPath>/SAML2/Redirect/SLO</ph:RequestPath>
+    </ph:ProfileHandler>
+
+    <ph:ProfileHandler xsi:type="ph:SAML2SLO" inboundBinding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+                       outboundBindingEnumeration="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect
+                                                   urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST-SimpleSign
+                                                   urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST
+                                                   urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact">
+        <ph:RequestPath>/SAML2/POST/SLO</ph:RequestPath>
+    </ph:ProfileHandler>
+
+    <ph:ProfileHandler xsi:type="ph:SAML2SLO" inboundBinding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST-SimpleSign" 
+                       outboundBindingEnumeration="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect
+                                                   urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST-SimpleSign
+                                                   urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST
+                                                   urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact">
+        <ph:RequestPath>/SAML2/POST-SimpleSign/SLO</ph:RequestPath>
+    </ph:ProfileHandler>
+
+    <ph:ProfileHandler xsi:type="ph:SAML2SLO" inboundBinding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP"
+                       outboundBindingEnumeration="urn:oasis:names:tc:SAML:2.0:bindings:SOAP">
+        <ph:RequestPath>/SAML2/SOAP/SLO</ph:RequestPath>
+    </ph:ProfileHandler>
+    
+    <ph:ProfileHandler xsi:type="ph:SAML2SLO" inboundBinding="urn:mace:shibboleth:2.0:profiles:LocalLogout">
+        <ph:RequestPath>/Logout</ph:RequestPath>
+    </ph:ProfileHandler>
+
+
     <ph:ProfileHandler xsi:type="ph:SAML2AttributeQuery" inboundBinding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" 
                        outboundBindingEnumeration="urn:oasis:names:tc:SAML:2.0:bindings:SOAP">
         <ph:RequestPath>/SAML2/SOAP/AttributeQuery</ph:RequestPath>

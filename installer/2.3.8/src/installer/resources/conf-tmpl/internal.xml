@@ -46,7 +46,7 @@
                     org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
                 </prop>
                 <prop key="string.resource.loader.class">
-                    edu.internet2.middleware.shibboleth.common.util.StringResourceLoader
+                    org.apache.velocity.runtime.resource.loader.StringResourceLoader
                 </prop>
             </props>
         </property>
@@ -80,6 +80,13 @@
                     </key>
                     <util:constant static-field="java.lang.Boolean.TRUE"/>
                 </entry>
+                <entry>
+                    <key>
+                        <value>http://apache.org/xml/features/validation/schema/normalized-value</value>
+                    </key>
+                    <util:constant static-field="java.lang.Boolean.FALSE"/>
+                </entry>
+
             </map>
         </property>
     </bean>
