@@ -10,8 +10,8 @@ that would provide a fully functional identity provider ready for deployment.
 ```properties
 gradleVersion=1.8
 shibCasAuthenticatorVersion=1.3.0.1
-shibIdpVersion=2.3.8
-shibCommonVersion=1.3.7
+shibIdpVersion=2.4.0
+shibCommonVersion=1.4.0
 junitVersion=4.11
 servletVersion=2.5
 ```
