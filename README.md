@@ -23,7 +23,7 @@ servletVersion=2.5
 - Ensure you have sufficient permissions to execute the build and deploy artifacts to `$CATALINA_HOME`
 
 # Configuration
-The build is controlled by the [`install.properties`](https://github.com/Unicon/unicon-shibboleth-idp-template/blob/master/installer/2.3.8/src/installer/resources/install.properties) file. Adjust the following settings based on your environment:
+The build is controlled by the [`install.properties`](https://github.com/Unicon/unicon-shibboleth-idp-template/blob/master/installer/2.4.0/src/installer/resources/install.properties) file. Adjust the following settings based on your environment:
 
 ```properties
 idp.home=/shibboleth/shibboleth-idp
