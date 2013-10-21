@@ -1,7 +1,8 @@
 Shibboleth IdP Installer Template
 ==============================
 
-A template for installing the [Shibboleth Identity Provider](https://wiki.shibboleth.net/confluence/display/SHIB2/IdPInstall) which uses the [Shib-CAS-Authenticator plugin](https://github.com/Unicon/shib-cas-authenticator) 
+A template for installing the [Shibboleth Identity Provider](https://wiki.shibboleth.net/confluence/display/SHIB2/IdPInstall)
+which uses the [Shib-CAS-Authenticator plugin](https://github.com/Unicon/shib-cas-authenticator) 
 for external SSO authentication. The shibboleth installer is preconfigured and decorated with additional tasks 
 that would provide a fully functional identity provider ready for deployment. 
 
@@ -31,6 +32,10 @@ idp.hostname=shib.server.edu
 cas.hostname=sso.server.edu
 idp.logging.level=DEBUG
 ```
+
+The  [Shib-CAS-Authenticator plugin](https://github.com/Unicon/shib-cas-authenticator)
+may require additional tweaks to the server environment. Additional details are [posted here]((https://github.com/Unicon/shib-cas-authenticator))
+
 
 # Testing
 * The build is configured to use the test SP service in its metadata. You should be able to test the functionality by [registering your Identity Provider metadata](https://www.testshib.org/metadata.html) with the test SP service. 
