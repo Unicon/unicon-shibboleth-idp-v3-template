@@ -1,4 +1,4 @@
-Unicon Shibboleth Identity Provider Template
+Shibboleth IdP Installer Template
 ==============================
 
 A template for installing the [Shibboleth Identity Provider](https://wiki.shibboleth.net/confluence/display/SHIB2/IdPInstall) which uses the [Shib-CAS-Authenticator plugin](https://github.com/Unicon/shib-cas-authenticator) 
