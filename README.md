@@ -34,7 +34,8 @@ idp.logging.level=DEBUG
 ```
 
 The  [Shib-CAS-Authenticator plugin](https://github.com/Unicon/shib-cas-authenticator)
-may require additional tweaks to the server environment. Additional details are [posted here]((https://github.com/Unicon/shib-cas-authenticator))
+may require additional tweaks to the server environment. Additional details are
+[posted here]((https://github.com/Unicon/shib-cas-authenticator)
 
 
 # Testing
