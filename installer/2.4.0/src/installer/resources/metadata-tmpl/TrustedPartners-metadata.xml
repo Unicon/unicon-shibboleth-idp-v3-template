@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EntitiesDescriptor Name="TrustedBilateralPartners"
+        xmlns="urn:oasis:names:tc:SAML:2.0:metadata"
+        xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+        xmlns:shibmd="urn:mace:shibboleth:metadata:1.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  
+<!--    
+"Placeholder" so that this XML file is schema-valid (i.e. at least one
+EntityDescriptor element is required, but it can be 'empty'
+-->
+<EntityDescriptor />
+</EntitiesDescriptor>

@@ -32,8 +32,10 @@ cas.hostname=sso.server.edu
 idp.logging.level=DEBUG
 ```
 
-## Sample Service Provider
-The build is configured to use the test SP service in its metadata. You should be able to test the functionality by [registering your Identity Provider metadata](https://www.testshib.org/metadata.html) with the test SP service. 
+# Testing
+* The build is configured to use the test SP service in its metadata. You should be able to test the functionality by [registering your Identity Provider metadata](https://www.testshib.org/metadata.html) with the test SP service. 
+* The build is also configured to optionally use a set of trusted partners whose metadata is provided by the configuration file `metadata/TrustedPartners-metadata.xml`
+* The build is also configured to accept the [InCommon metadata](http://wayf.incommonfederation.org/InCommon/InCommon-metadata.xml). The metadata is expected to be signed and validated by the `incommon.pem` file that the build locally keeps track of at `credentials/incommon.pem`.
 
 # Build
 Navigate to the `installer\${shibIdpVersion}\` directory:

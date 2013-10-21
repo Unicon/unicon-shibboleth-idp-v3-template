@@ -103,6 +103,32 @@
             -->
         </metadata:MetadataProvider>
         
+        <!-- Reads metadata from a URL and store a backup copy on the file system. -->
+    	<!-- Validates the signature of the metadata and filters out all by SP entities in order to save memory -->
+    	<!-- To use: fill in 'metadataURL' and 'backingFile' properties on MetadataResource element -->
+        <metadata:MetadataProvider id="URLMD_InCommon" xsi:type="metadata:FileBackedHTTPMetadataProvider"
+                      metadataURL="http://wayf.incommonfederation.org/InCommon/InCommon-metadata.xml"
+                      backingFile="$IDP_HOME$/metadata/InCommon-metadata.xml">
+	        <metadata:MetadataFilter xsi:type="metadata:ChainingFilter">
+	            <metadata:MetadataFilter xsi:type="metadata:RequiredValidUntil"
+	                            maxValidityInterval="P15D" />
+	            <metadata:MetadataFilter xsi:type="metadata:SignatureValidation"
+	                            trustEngineRef="shibboleth.MetadataTrustEngine"
+	                            requireSignedMetadata="true" />
+	                <metadata:MetadataFilter xsi:type="metadata:EntityRoleWhiteList">
+	                <metadata:RetainedRole>samlmd:SPSSODescriptor</metadata:RetainedRole>
+	            </metadata:MetadataFilter>
+	        </metadata:MetadataFilter>
+	    </metadata:MetadataProvider>
+
+	    <!-- Local file of metadata for manually maintained Trusted Partners -->
+	    <!-- (The default setting for max time to check for updated metadata is 4 hours, you might want to make that shorter for a local file. This is set by using the "maxRefreshDelay" attribute in the above metadata specification. E.g. ' maxRefreshDelay="PT1H" ' to set to one hour. 
+
+	    See https://wiki.shibboleth.net/confluence/display/SHIB2/IdPMetadataProvider for an explanation of all the time setting options related to reloading metadata.) -->
+    	<metadata:MetadataProvider xsi:type="metadata:FilesystemMetadataProvider"
+              id="TrustedPartners"
+              metadataFile="$IDP_HOME$/metadata/TrustedPartners-metadata.xml" />
+
     </metadata:MetadataProvider>
 
     
@@ -114,15 +140,18 @@
         <security:Certificate>$IDP_HOME$/credentials/idp.crt</security:Certificate>
     </security:Credential>
     
-    <!-- Trust engine used to evaluate the signature on loaded metadata. -->
+    <!-- Trust engine used to evaluate the signature on loaded metadata. -->   
     <!--
+    	Note that the above configuration for the InCommon metadata requires that is signed and that the signature is checked, so that you can verify you are getting the "real deal" file. You need to add the following to the Security Configurations section of that file (follows the metadata section) to use the InCommon signing certificate to verify the metadata file:
+    -->
+
     <security:TrustEngine id="shibboleth.MetadataTrustEngine" xsi:type="security:StaticExplicitKeySignature">
-        <security:Credential id="MyFederation1Credentials" xsi:type="security:X509Filesystem">
-            <security:Certificate>$IDP_HOME$/credentials/federation1.crt</security:Certificate>
+        <security:Credential id="InCommonFederationCredentials" xsi:type="security:X509Filesystem">
+            <security:Certificate>$IDP_HOME$/credentials/incommon.pem</security:Certificate>
         </security:Credential>
     </security:TrustEngine>
-     -->
-     
+
+
     <!-- DO NOT EDIT BELOW THIS POINT -->
     <!-- 
         The following trust engines and rules control every aspect of security related to incoming messages. 

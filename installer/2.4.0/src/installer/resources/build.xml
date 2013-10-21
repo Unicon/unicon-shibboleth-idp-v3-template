@@ -6,7 +6,8 @@
 
     <property name="installer.home" value="${basedir}"/>
     <property name="installer.dir" value="${installer.home}/src/installer"/>
-    
+    <property name="etc.dir" value="${basedir}/../etc" />
+
     <property name="resources.dir" value="${installer.dir}/resources"/>
     <property name="tools.dir" value="${basedir}/src/tools"/>
     <property name="webapp.dir" value="${basedir}/src/main/webapp"/>
@@ -123,6 +124,8 @@
                 <selfSignedCert hostname="${idp.hostname}" uriSubjectAltNames="${idp.entity.id}" certificateLifetime="${idp.cert.lifetime}"
                 	            privateKeyFile="${idp.home.path}/credentials/idp.key" certificateFile="${idp.home.path}/credentials/idp.crt" 
                 	            keystoreFile="${idp.home.path}/credentials/idp.jks" keystorePassword="${idp.keystore.pass}" />
+               	
+               	<antcall target="copyExtraCerts" />
 
                 <copy todir="${idp.home.path}/bin" preservelastmodified="true" overwrite="true">
                     <fileset dir="${tools.dir}/bash"/>
@@ -256,14 +259,14 @@
     <target name="bridge" description="Deploys the shib-cas authenticator">
         <echo message="Preparing web.xml for the bridge based on installer settings..." />
 
-        <echo>Prepared the facase web.xml file at facade.web.xml ${facade.web.xml}</echo>
-        <echo>The facade war file will be generated at ${facade.war.file}</echo>
+        <echo>Prepared the facade [web.xml] file at [${facade.web.xml}]</echo>
+        <echo>The facade war file will be generated at [${facade.war.file}]</echo>
 
         <delete file="${facade.web.xml}" />
         <delete file="${facade.war.file}" />
 
         <copy tofile="${facade.web.xml}" preservelastmodified="true" overwrite="true"
-              file="${basedir}/../etc/web.xml">
+              file="${etc.dir}/web.xml">
             <filterset begintoken="$" endtoken="$">
                 <filter token="CAS_HOSTNAME" value="${cas.hostname}"/>
                 <filter token="IDP_HOSTNAME" value="${idp.hostname}"/>
@@ -307,7 +310,7 @@
         <echo message="Preparing web.xml for the bridge based on installer settings..." />
         <pathToAbsolutePath path="${idp.home}" addproperty="idp.home.path"/>
         <copy todir="${idp.fragment.path}" preservelastmodified="true" overwrite="true"
-              file="${basedir}/../etc/idp.xml">
+              file="${etc.dir}/idp.xml">
             
             <filterset begintoken="$" endtoken="$">
                 <filter token="IDP_HOME" value="${idp.home.path}"/>
@@ -354,7 +357,14 @@
                 <selfSignedCert hostname="${idp.hostname}" certificateLifetime="${idp.cert.lifetime}" uriSubjectAltNames="${idp.entity.id}"
                 	            privateKeyFile="${idp.home.path}/credentials/idp.key.new" certificateFile="${idp.home.path}/credentials/idp.crt.new"  
                 	            keystoreFile="${idp.home.path}/credentials/idp.jks.new"  keystorePassword="${idp.keystore.pass}" /> 
+               	<antcall target="copyExtraCerts" />
             </then>
         </if>
+    </target>
+
+    <target name="copyExtraCerts">
+    	<copy todir="${idp.home.path}/credentials" overwrite="true" failonerror="true">
+			    	<fileset dir="${etc.dir}" includes="**/*.pem"/>
+	  	</copy>
     </target>
 </project>
