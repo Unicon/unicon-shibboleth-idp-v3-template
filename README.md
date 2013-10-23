@@ -26,7 +26,7 @@ servletVersion=2.5
 The build is controlled by the [`install.properties`](https://github.com/Unicon/unicon-shibboleth-idp-template/blob/master/installer/2.4.0/src/installer/resources/install.properties) file. Adjust the following settings based on your environment:
 
 ```properties
-idp.home=/shibboleth/shibboleth-idp
+idp.home=/opt/shibboleth-idp
 idp.hostname=shib.server.edu
 cas.hostname=sso.server.edu
 idp.logging.level=DEBUG
