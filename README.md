@@ -20,7 +20,6 @@ servletVersion=2.5
 # Requirements
 - Ensure you have set `$CATALINA_HOME` 
 - Ensure you have set `$JAVA_HOME` and `$JAVA_HOME\bin` is in your `$PATH`
-- Ensure you have set `$ANT_HOME` and `$ANT_HOME\bin` is in your `$PATH`
 - Ensure you have sufficient permissions to execute the build and deploy artifacts to `$CATALINA_HOME`
 
 # Configuration
