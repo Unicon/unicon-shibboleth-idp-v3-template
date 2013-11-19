@@ -23,8 +23,8 @@ servletVersion=2.5
 - Ensure you have sufficient permissions to execute the build and deploy artifacts to `$CATALINA_HOME`
 
 # Differences
-- Idp session lifetime is changes from the default 30 minutes to 1 minute
-- External authentication handler is used, delegating to CAS
+- Idp session lifetime is changed from the default 30 minutes to [1 minute](https://github.com/Unicon/unicon-shibboleth-idp-template/blob/master/installer/2.4.0/src/installer/resources/conf-tmpl/internal.xml#L102)
+- External authentication handler is used, delegating SSO to CAS
 - Previous session handler is turned off
 - Logging levels are changed to be at `DEBUG` by default
 
