@@ -101,7 +101,7 @@
 
     <bean id="shibboleth.SessionManager" class="edu.internet2.middleware.shibboleth.idp.session.impl.SessionManagerImpl" depends-on="shibboleth.LogbackLogging">
         <constructor-arg ref="shibboleth.StorageService"/>
-        <constructor-arg value="1800000" type="long"/>
+        <constructor-arg value="60000" type="long"/>
     </bean>
 
     <bean id="shibboleth.ArtifactMap" class="org.opensaml.common.binding.artifact.BasicSAMLArtifactMap" depends-on="shibboleth.LogbackLogging">
