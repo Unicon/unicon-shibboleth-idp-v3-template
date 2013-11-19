@@ -22,6 +22,12 @@ servletVersion=2.5
 - Ensure you have set `$JAVA_HOME` and `$JAVA_HOME\bin` is in your `$PATH`
 - Ensure you have sufficient permissions to execute the build and deploy artifacts to `$CATALINA_HOME`
 
+# Differences
+- Idp session lifetime is changes from the default 30 minutes to 1 minute
+- External authentication handler is used, delegating to CAS
+- Previous session handler is turned off
+- Logging levels are changed to be at `DEBUG` by default
+
 # Configuration
 The build is controlled by the [`install.properties`](https://github.com/Unicon/unicon-shibboleth-idp-template/blob/master/installer/2.4.0/src/installer/resources/install.properties) file. Adjust the following settings based on your environment:
 
