@@ -239,6 +239,7 @@
             <filterset begintoken="$" endtoken="$">
                 <filter token="IDP_HOME" value="${idp.home.url}"/>
                 <filter token="IDP_HOSTNAME" value="${idp.hostname}"/>
+                <filter token="IDP_STATUS_ALLOWED_IPS" value="${idp.status.page.allowedips}"/>
             </filterset>
         </copy>
 
