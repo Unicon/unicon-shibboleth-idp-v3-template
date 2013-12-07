@@ -310,13 +310,13 @@
     <!-- Example LDAP Connector -->
     <!--
     <resolver:DataConnector id="myLDAP" xsi:type="dc:LDAPDirectory"
-        ldapURL="ldap://ldap.example.org" 
-        baseDN="ou=people,dc=example,dc=org" 
-        principal="uid=myservice,ou=system"
-        principalCredential="myServicePassword">
+        ldapURL="$IDP_LDAP_ATTR_URL$" 
+        baseDN="$IDP_LDAP_ATTR_BASEDN$" 
+        principal="$IDP_LDAP_ATTR_PRINCIPAL$"
+        principalCredential="$IDP_LDAP_ATTR_PRINCIPAL_CREDS$">
         <dc:FilterTemplate>
             <![CDATA[
-                (uid=$requestContext.principalName)
+                $IDP_LDAP_ATTR_FILTER$
             ]]>
         </dc:FilterTemplate>
     </resolver:DataConnector>

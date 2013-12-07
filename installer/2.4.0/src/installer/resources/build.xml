@@ -156,6 +156,13 @@
                         <filter token="IDP_LDAP_FILTER" value="${idp.login.ldap.userfilter}" />
                         <filter token="IDP_LDAP_TREESEARCH" value="${idp.login.ldap.subtreesearch}" />
 
+                        <!-- LDAP LAttribute Resolver configuration -->
+                        <filter token="IDP_LDAP_ATTR_URL" value="${idp.attr.resolver.ldap.url}" />
+                        <filter token="IDP_LDAP_ATTR_BASEDN" value="${idp.attr.resolver.ldap.basedn}" />
+                        <filter token="IDP_LDAP_ATTR_PRINCIPAL" value="${idp.attr.resolver.principal}" />
+                        <filter token="IDP_LDAP_ATTR_PRINCIPAL_CREDS" value="${idp.attr.resolver.principalCredential}" />
+                        <filter token="IDP_LDAP_ATTR_FILTER" value="${idp.attr.resolver.filter}" />
+
                     </filterset>
                 </copy>
 
