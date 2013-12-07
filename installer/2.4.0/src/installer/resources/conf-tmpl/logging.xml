@@ -12,7 +12,7 @@
     <logger name="org.opensaml" level="WARN"/>
     
     <!-- Logs LDAP related messages -->
-    <logger name="edu.vt.middleware.ldap" level="WARN"/>
+    <logger name="edu.vt.middleware.ldap" level="$IDP_LDAP_LOG_LEVEL$"/>
     
     <!-- Logs inbound and outbound protocols messages at DEBUG level -->
     <!--

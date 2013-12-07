@@ -146,6 +146,16 @@
                         <filter token="IDP_CERTIFICATE" value="${idp.cert}"/>
                         <filter token="IDP_HOSTNAME" value="${idp.hostname}"/>
                         <filter token="IDP_LOG_LEVEL" value="${idp.logging.level}" />
+                        <filter token="IDP_LDAP_LOG_LEVEL" value="${idp.logging.ldap.level}" />
+
+                        <!-- LDAP Login Handler for UsernamePassword authentication -->
+                        <filter token="IDP_LDAP_URL" value="${idp.login.ldap.url}" />
+                        <filter token="IDP_LDAP_BASEDN" value="${idp.login.ldap.basedn}" />
+                        <filter token="IDP_LDAP_SSL" value="${idp.login.ldap.ssl}" />
+                        <filter token="IDP_LDAP_TLS" value="${idp.login.ldap.tls}" />
+                        <filter token="IDP_LDAP_FILTER" value="${idp.login.ldap.userfilter}" />
+                        <filter token="IDP_LDAP_TREESEARCH" value="${idp.login.ldap.subtreesearch}" />
+
                     </filterset>
                 </copy>
 
