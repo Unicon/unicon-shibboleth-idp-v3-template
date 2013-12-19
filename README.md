@@ -32,10 +32,28 @@ servletVersion=2.5
 The build is controlled by the [`install.properties`](https://github.com/Unicon/unicon-shibboleth-idp-template/blob/master/installer/2.4.0/src/installer/resources/install.properties) file. Adjust the following settings based on your environment:
 
 ```properties
-idp.home=/opt/shibboleth-idp
-idp.hostname=shib.server.edu
 cas.hostname=sso.server.edu
+
+idp.hostname=shib.server.edu
+idp.home=/opt/shibboleth-idp
+idp.status.page.allowedips=127.0.0.1/32 \:\:1/128
+
+# The handler must be explicitly enabled in the configration.
+idp.login.ldap.subtreesearch=false
+idp.login.ldap.basedn=ou\=people,dc\=example,dc\=org
+idp.login.ldap.userfilter=uid\={0}
+idp.login.ldap.url=ldap://ldap.example.org
+idp.login.ldap.tls=false
+
 idp.logging.level=DEBUG
+idp.logging.ldap.level=INFO
+
+# The resolver must be explicitly enabled in the configration. 
+idp.attr.resolver.ldap.url=ldap://ldap.example.org
+idp.attr.resolver.ldap.basedn=ou=people,dc=example,dc=org
+idp.attr.resolver.principal=uid=myservice,ou=system
+idp.attr.resolver.principalCredential=myServicePassword
+idp.attr.resolver.filter=(uid=$requestContext.principalName)
 ```
 
 The  [Shib-CAS-Authenticator plugin](https://github.com/Unicon/shib-cas-authenticator)
