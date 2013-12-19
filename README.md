@@ -54,6 +54,10 @@ idp.attr.resolver.ldap.basedn=ou=people,dc=example,dc=org
 idp.attr.resolver.principal=uid=myservice,ou=system
 idp.attr.resolver.principalCredential=myServicePassword
 idp.attr.resolver.filter=(uid=$requestContext.principalName)
+
+# InCommon metadata url and cert name
+idp.metadata.incommon.url=http://md.incommon.org/InCommon/InCommon-metadata.xml
+idp.metadata.incommon.cert=inc-md-cert.pem
 ```
 
 The  [Shib-CAS-Authenticator plugin](https://github.com/Unicon/shib-cas-authenticator)
