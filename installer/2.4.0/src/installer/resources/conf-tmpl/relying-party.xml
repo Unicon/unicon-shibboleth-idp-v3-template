@@ -107,7 +107,7 @@
     	<!-- Validates the signature of the metadata and filters out all by SP entities in order to save memory -->
     	<!-- To use: fill in 'metadataURL' and 'backingFile' properties on MetadataResource element -->
         <metadata:MetadataProvider id="URLMD_InCommon" xsi:type="metadata:FileBackedHTTPMetadataProvider"
-                      metadataURL="http://wayf.incommonfederation.org/InCommon/InCommon-metadata.xml"
+                      metadataURL="$METADATA_URL_INCOMMON$"
                       backingFile="$IDP_HOME$/metadata/InCommon-metadata.xml">
 	        <metadata:MetadataFilter xsi:type="metadata:ChainingFilter">
 	            <metadata:MetadataFilter xsi:type="metadata:RequiredValidUntil"
@@ -147,7 +147,7 @@
 
     <security:TrustEngine id="shibboleth.MetadataTrustEngine" xsi:type="security:StaticExplicitKeySignature">
         <security:Credential id="InCommonFederationCredentials" xsi:type="security:X509Filesystem">
-            <security:Certificate>$IDP_HOME$/credentials/incommon.pem</security:Certificate>
+            <security:Certificate>$IDP_HOME$/credentials/$METADATA_CERT_INCOMMON$</security:Certificate>
         </security:Credential>
     </security:TrustEngine>
 

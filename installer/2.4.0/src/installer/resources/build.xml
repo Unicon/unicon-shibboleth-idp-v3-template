@@ -163,6 +163,10 @@
                         <filter token="IDP_LDAP_ATTR_PRINCIPAL_CREDS" value="${idp.attr.resolver.principalCredential}" />
                         <filter token="IDP_LDAP_ATTR_FILTER" value="${idp.attr.resolver.filter}" />
 
+                        <!-- INCOMMON configuration -->
+                        <filter token="METADATA_URL_INCOMMON" value="${idp.metadata.incommon.url}" />
+                        <filter token="METADATA_CERT_INCOMMON" value="${idp.metadata.incommon.cert}" />
+                        
                     </filterset>
                 </copy>
 
@@ -382,7 +386,7 @@
 
     <target name="copyExtraCerts">
     	<copy todir="${idp.home.path}/credentials" overwrite="true" failonerror="true">
-			    	<fileset dir="${etc.dir}" includes="**/*.pem"/>
+			<fileset dir="${etc.dir}" includes="**/*.pem"/>
 	  	</copy>
     </target>
 </project>
