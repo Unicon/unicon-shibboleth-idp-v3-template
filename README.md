@@ -69,7 +69,7 @@ environment's configuration. (i.e. Tomcat's `server.xml`, etc)
 # Testing
 * The build is configured to use the test SP service in its metadata. You should be able to test the functionality by [registering your Identity Provider metadata](https://www.testshib.org/metadata.html) with the test SP service. 
 * The build is also configured to optionally use a set of trusted partners whose metadata is provided by the configuration file `metadata/TrustedPartners-metadata.xml`
-* The build is also configured to accept the [InCommon metadata](http://wayf.incommonfederation.org/InCommon/InCommon-metadata.xml). The metadata is expected to be signed and validated by the `incommon.pem` file that the build locally keeps track of at `credentials/incommon.pem`.
+* The build is also configured to accept the [InCommon metadata](https://github.com/Unicon/unicon-shibboleth-idp-template/blob/master/installer/2.4.0/src/installer/resources/conf-tmpl/relying-party.xml#L109). The metadata is expected to be signed and validated by the [metadata siging certificate](https://github.com/Unicon/unicon-shibboleth-idp-template/blob/master/installer/etc/inc-md-cert.pem) file.
 
 # Build
 Navigate to the `installer\${shibIdpVersion}\` directory:
