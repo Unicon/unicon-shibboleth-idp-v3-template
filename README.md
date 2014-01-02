@@ -62,7 +62,7 @@ idp.metadata.incommon.cert=inc-md-cert.pem
 
 The  [Shib-CAS-Authenticator plugin](https://github.com/Unicon/shib-cas-authenticator)
 may require additional tweaks to the server environment. Additional details are
-[posted here]((https://github.com/Unicon/shib-cas-authenticator). This build does not modify the server environment's
+[posted here](https://github.com/Unicon/shib-cas-authenticator). This build does not modify the server environment's
 configuration at all. The adopter is responsible for making any and all changes needed to the deployment
 environment's configuration. (i.e. Tomcat's `server.xml`, etc)
 
