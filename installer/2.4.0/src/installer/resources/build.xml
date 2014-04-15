@@ -11,35 +11,9 @@
     <property name="resources.dir" value="${installer.dir}/resources"/>
     <property name="tools.dir" value="${basedir}/src/tools"/>
     <property name="webapp.dir" value="${basedir}/src/main/webapp"/>
-    <property name="shib.cas.dir" value="${basedir}/../../shib-cas-authenticator" />
     <property name="idp.fragment.path" value="${env.CATALINA_HOME}/conf/Catalina/localhost" />
-    <property name="idp.casinvoker.libs" value="${shib.cas.dir}/idp-cas-invoker/build/libs" />    
-    <property name="facade.web.xml" value="${shib.cas.dir}/cas-authentication-facade/src/main/webapp/WEB-INF/web.xml" />
-    <property name="facade.war.file" value="${shib.cas.dir}/cas-authentication-facade/build/libs/casauth.war" />
     <property name="war.name" value="idp"/>
-	
-	<!--
-	<echo message=" "/>
-    <echo message="!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"/>
-    <echo message="Review the following build settings"/>
-    <echo message="!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"/>
-
-    <echo message=" "/>
-    <echo message="installer.home: ${installer.home}" />
-    <echo message="installer.dir: ${installer.dir}" />
-    <echo message="resources.dir: ${resources.dir}" />
-    <echo message="tools.dir: ${tools.dir}" />
-    <echo message="webapp.dir: ${webapp.dir}" />
-    <echo message="shib.cas.dir: ${shib.cas.dir}" />
-    <echo message="idp.fragment.path: ${idp.fragment.path}" />
-    <echo message="idp.casinvoker.libs: ${idp.casinvoker.libs}" />
-    <echo message="facade.web.xml: ${facade.web.xml}" />
-    <echo message="facade.war.file: ${facade.war.file}" />
-    <echo message=" "/>
-
-    <input message="Press ENTER to contrinue..."/>
-	-->
-	
+		
     <!-- Installation specific property file -->
     <property file="${resources.dir}/install.properties"/>
 	
@@ -59,7 +33,7 @@
         </delete>
     </target>
 
-    <target name="install" description="Installs the identity provider software." depends="bridge">
+    <target name="install" description="Installs the identity provider software.">
     	
     	<echo message="!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"/>
     	<echo message="Be sure you have read the installation/upgrade instructions on the Shibboleth website before proceeding."/>
@@ -147,6 +121,8 @@
                         <filter token="IDP_HOSTNAME" value="${idp.hostname}"/>
                         <filter token="IDP_LOG_LEVEL" value="${idp.logging.level}" />
                         <filter token="IDP_LDAP_LOG_LEVEL" value="${idp.logging.ldap.level}" />
+
+                        <filter token="CAS_SHIB_PROP_FILE" value="${cas.shib.properties.file}" />
 
                         <!-- LDAP Login Handler for UsernamePassword authentication -->
                         <filter token="IDP_LDAP_URL" value="${idp.login.ldap.url}" />
@@ -249,7 +225,6 @@
 
         <copy todir="${idp.home.path}/lib" preservelastmodified="true" overwrite="true">
             <fileset dir="${basedir}/lib"/>
-            <fileset dir="${idp.casinvoker.libs}" />
         </copy>
         <copy todir="${env.CATALINA_HOME}/endorsed" preservelastmodified="true" failonerror="false" overwrite="true">
             <fileset dir="endorsed"/>
@@ -260,6 +235,7 @@
             <filterset begintoken="$" endtoken="$">
                 <filter token="IDP_HOME" value="${idp.home.url}"/>
                 <filter token="IDP_HOSTNAME" value="${idp.hostname}"/>
+                <filter token="CAS_SHIB_PROP_FILE" value="${cas.shib.properties.file}" />
                 <filter token="IDP_STATUS_ALLOWED_IPS" value="${idp.status.page.allowedips}"/>
             </filterset>
         </copy>
@@ -278,58 +254,9 @@
     	
     </target>
 
-    <target name="bridge" description="Deploys the shib-cas authenticator">
-        <echo message="Preparing web.xml for the bridge based on installer settings..." />
-
-        <echo>Prepared the facade [web.xml] file at [${facade.web.xml}]</echo>
-        <echo>The facade war file will be generated at [${facade.war.file}]</echo>
-
-        <delete file="${facade.web.xml}" />
-        <delete file="${facade.war.file}" />
-
-        <copy tofile="${facade.web.xml}" preservelastmodified="true" overwrite="true"
-              file="${etc.dir}/web.xml">
-            <filterset begintoken="$" endtoken="$">
-                <filter token="CAS_HOSTNAME" value="${cas.hostname}"/>
-                <filter token="IDP_HOSTNAME" value="${idp.hostname}"/>
-            </filterset>
-        </copy>
-
-        <pathToAbsolutePath path="${idp.home}" addproperty="idp.home.path"/>
-        <echo message="Idp installer home directory is ${installer.home}" />
-
-        <copy tofile="${shib.cas.dir}/gradle.properties" preservelastmodified="true" overwrite="true"
-              file="${shib.cas.dir}/gradle.sample.properties">
-            <filterset begintoken="$" endtoken="$">
-                <filter token="IDP_INSTALLER_HOME" value="${installer.home}"/>
-            </filterset>
-        </copy>
-        <replace file="${shib.cas.dir}/gradle.properties" token="\" value="/"/>
-
-        <echo message="Cleaning up lingering artifacts from last deployment..." />
-        <delete dir="${env.CATALINA_HOME}/webapp/casauth" />
-        <delete file="${env.CATALINA_HOME}/webapp/casauth.war" />
-
-        <condition property="gradlew" value="gradlew.bat" else="gradlew">
-            <os family="windows" />
-        </condition>
-       
-        <echo message="Launching gradle build at ${shib.cas.dir}/${gradlew}..." />
-        <chmod file="${shib.cas.dir}/*.sh" perm="+x"/>
-        <chmod file="${shib.cas.dir}/*.bat" perm="+x"/>
-
-        <exec executable="${shib.cas.dir}/${gradlew}" dir="${shib.cas.dir}" failonerror="true" failifexecutionfails="true"/>         
-
-        <echo message="Deploying the final casauth.war file..." />
-        <copy file="${facade.war.file}" todir="${env.CATALINA_HOME}/webapps" overwrite="true" />
-        
-        <delete file="${facade.web.xml}" />
-        <delete file="${shib.cas.dir}/gradle.properties" />
-        <echo message="Shib-CAS authenticator has been successfully deployed to ${env.CATALINA_HOME}\webapps" />
-    </target>
-
+    
     <target name="fragment" description="Deploys the IdP's web fragment file...">
-        <echo message="Preparing web.xml for the bridge based on installer settings..." />
+        <echo message="Preparing web.xml based on installer settings..." />
         <pathToAbsolutePath path="${idp.home}" addproperty="idp.home.path"/>
         <copy todir="${idp.fragment.path}" preservelastmodified="true" overwrite="true"
               file="${etc.dir}/idp.xml">
@@ -342,9 +269,15 @@
         <replace file="${idp.fragment.path}/idp.xml" token="\" value="/"/>
     </target>
 
-    <target name="all" description="Install idp, bridge and fragment">
+    <target name="all" description="Install idp and fragment">
         <antcall target="install" />
         <antcall target="fragment" />
+    </target>
+
+    <target name="copy" description="Deploy the idp">
+        <delete dir="${env.CATALINA_HOME}/webapps/${war.name}" verbose="true" />
+        <copy todir="${env.CATALINA_HOME}/webapps" preservelastmodified="false" overwrite="true"
+              file="${idp.home}/war/${war.name}.war" verbose="true" />
     </target>
 
     <target name="renew-cert" description="Create a new certificate/key pair."> 

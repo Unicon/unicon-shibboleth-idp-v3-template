@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <ph:ProfileHandlerGroup xmlns:ph="urn:mace:shibboleth:2.0:idp:profile-handler" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-                        xsi:schemaLocation="urn:mace:shibboleth:2.0:idp:profile-handler classpath:/schema/shibboleth-2.0-idp-profile-handler.xsd">
+                        xmlns:shib-cas="http://unicon.net/shib-cas/authn"
+                        xsi:schemaLocation="urn:mace:shibboleth:2.0:idp:profile-handler classpath:/schema/shibboleth-2.0-idp-profile-handler.xsd http://unicon.net/shib-cas/authn classpath:/schema/casLoginHandler.xsd">
 
     <!-- Error Handler -->
     <ph:ErrorHandler xsi:type="ph:JSPErrorHandler" jspPagePath="/error.jsp"/>
@@ -112,14 +113,6 @@
         <ph:RequestPath>/SAML2/SOAP/ArtifactResolution</ph:RequestPath>
     </ph:ProfileHandler>
     
-    <!-- Login handler that delegates the act of authentication to an external system. -->
-    <!-- This login handler and the RemoteUser login handler will be merged in the next major release. -->
-
-    <ph:LoginHandler xsi:type="ph:ExternalAuthn"
-                         externalAuthnPath="/authn/external"
-                         supportsForcedAuthentication="true">
-       <ph:AuthenticationMethod>urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport</ph:AuthenticationMethod>
-    </ph:LoginHandler>
     
     <!-- Login Handlers 
     <ph:LoginHandler xsi:type="ph:RemoteUser">
@@ -151,5 +144,15 @@
         <ph:AuthenticationMethod>urn:oasis:names:tc:SAML:2.0:ac:classes:PreviousSession</ph:AuthenticationMethod>
     </ph:LoginHandler>
     -->
+
+    <!-- propertiesFile attribute is optional - default value show here -->
+    <ph:LoginHandler xsi:type="shib-cas:CasLoginHandler" 
+                     propertiesFile="$CAS_SHIB_PROP_FILE$">
+        <ph:AuthenticationMethod>urn:oasis:names:tc:SAML:2.0:ac:classes:unspecified</ph:AuthenticationMethod>
+        <!-- There may be 0..N paramBuilder entries. Each must list the fully qualified name 
+             of the class to be added. 
+        -->
+        <shib-cas:paramBuilder class="net.unicon.idp.authn.provider.extra.EntityIdParameterBuilder" />
+    </ph:LoginHandler>
 
 </ph:ProfileHandlerGroup>
