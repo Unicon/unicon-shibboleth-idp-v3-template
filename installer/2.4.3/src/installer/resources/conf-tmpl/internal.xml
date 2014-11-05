@@ -68,7 +68,7 @@
                     <key>
                         <value>http://apache.org/xml/properties/security-manager</value>
                     </key>
-                    <bean id="shibboleth.XercesSecurityManager" class="org.apache.xerces.util.SecurityManager"/>
+                    <bean class="com.sun.org.apache.xerces.internal.util.SecurityManager"/>
                 </entry>
             </map>
         </property>

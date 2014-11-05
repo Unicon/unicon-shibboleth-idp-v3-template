@@ -45,7 +45,7 @@ $IDP_CERTIFICATE$
             <shibmd:Scope regexp="false">$IDP_SCOPE$</shibmd:Scope>
         </Extensions>
 
-        <KeyDescriptor>
+        <KeyDescriptor use="signing">
             <ds:KeyInfo>
                 <ds:X509Data>
                     <ds:X509Certificate>
