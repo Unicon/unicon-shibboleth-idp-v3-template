@@ -16,9 +16,9 @@ A template for installing the [Shibboleth Identity Provider](https://wiki.shibbo
 # Versions
 
 ```properties
-shibCasAuthenticatorVersion=2.0.1
-shibIdpVersion=2.4.0
-casClientVersion=3.3.1
+shibCasAuthenticatorVersion=2.0.4
+shibIdpVersion=2.4.3
+casClientVersion=3.3.3
 ```
 
 # Requirements
