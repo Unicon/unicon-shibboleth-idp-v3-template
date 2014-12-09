@@ -42,7 +42,7 @@ The  [Shib-CAS-Authenticator plugin][shibcas] may require additional tweaks to t
 * The build is also configured to accept the [InCommon metadata](https://github.com/Unicon/unicon-shibboleth-idp-template/blob/master/installer/2.4.3/src/installer/resources/conf-tmpl/relying-party.xml#L109). The metadata is expected to be signed and validated by the [metadata siging certificate](https://github.com/Unicon/unicon-shibboleth-idp-template/blob/master/installer/etc/inc-md-cert.pem) file.
 
 # Build
-Navigate to the `installer\${shibIdpVersion}\` directory:
+Navigate to the `installer\2.4.3\` directory:
 
 * To install the IdP and create the `idp.war` file, execute: `install`
 * To install the IdP web fragment, execute: `install fragment`
