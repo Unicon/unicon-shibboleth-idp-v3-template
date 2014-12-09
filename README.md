@@ -32,7 +32,7 @@ casClientVersion=3.3.3
 The build is controlled by the [`install.properties`](https://github.com/Unicon/unicon-shibboleth-idp-template/blob/master/installer/2.4.0/src/installer/resources/install.properties) file. 
 
 ## Shib-CAS Authenticator Settings
-The Shib-CAS authenticator's configuration is controlled by an external properties file. Please see [this resource][shib-cas]
+The Shib-CAS authenticator's configuration is controlled by an external properties file. Please see [this resource](shib-cas)
 
 The  [Shib-CAS-Authenticator plugin][shibcas] may require additional tweaks to the server environment. Additional details are [posted here][shibcas]. This build does not modify the server environment's configuration at all. The adopter is responsible for making any and all changes needed to the deployment environment's configuration. (i.e. Tomcat's `server.xml`, etc)
 
