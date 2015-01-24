@@ -22,10 +22,10 @@ casClientVersion=3.3.3
 ```
 
 # Requirements
-- Ensure you have set `$CATALINA_HOME` or `$JETTY_HOME`.
-- Ensure you have set `$JAVA_HOME` and `$JAVA_HOME\bin` is in your `$PATH`
-- Ensure you have sufficient permissions to execute the build and deploy artifacts to `$CATALINA_HOME` or `$JETTY_HOME`
-- Ensure `$CATALINA_HOME` OR `$JETTY_HOME` is running under port 443 and valid certificates are installed.
+- Ensure you have set `$CATALINA_HOME` or `$JETTY_BASE` (to deploy the context fragment).
+- Ensure you have set `$JAVA_HOME\bin` is in your `$PATH`
+- Ensure you have sufficient permissions to execute the build and deploy artifacts to `$CATALINA_HOME` or `$JETTY_BASE`
+- Ensure `$CATALINA_HOME` OR `$JETTY_BASE` is running under port 443 and valid certificates are installed.
 
 # Configuration
 
@@ -33,7 +33,7 @@ casClientVersion=3.3.3
 The build is controlled by the [`install.properties`](https://github.com/Unicon/unicon-shibboleth-idp-template/blob/master/installer/2.4.3/src/installer/resources/install.properties) file. 
 
 ## Shib-CAS Authenticator Settings
-The [Shib-CAS authenticator's configuration][shibcas] is controlled by an external properties file whose location is referenced via the `install.properties` file.
+The [Shib-CAS authenticator's configuration][shibcas] is controlled by settings in the `IDP_HOME/conf/idp.properties`. To activate the module, uncomment and populate the appropriate `shibcas.` properties.
 
 The  [Shib-CAS-Authenticator plugin][shibcas] may require additional tweaks to the server environment. Additional details are [posted here][shibcas]. This build does not modify the server environment's configuration at all. The adopter is responsible for making any and all changes needed to the deployment environment's configuration. (i.e. Tomcat's `server.xml`, etc)
 
@@ -42,12 +42,8 @@ Navigate to the `installer\3.0.0\bin` directory:
 
 * To install the IdP and create the `idp.war` file, execute: `install`
 * To install the IdP web fragment, execute: `install fragment`
-* If you wish to combine all above tasks into one, simply execute: `install all`
+* If you wish to combine all above tasks into one, simply execute: `install install fragment`
 * To see a list of targets available, execute: `install -projecthelp`
-
-The installer will ask you a series of questions and will subsequently remember your answers by updating the `install.properties` file. It is recommended that you stick with the default answers given during the install, and only just provide environment specific answers (such as the idp host name, etc) 
-
-Once the installation step is done, navigate to the `conf` directory of your `$IDP_HOME` and update the `cas-shib.properties` file with the addresses of your CAS and Shibboleth server. 
 
 # Testing
 * The build is configured to use the test SP service in its metadata. You should be able to test the functionality by [registering your Identity Provider metadata](https://www.testshib.org/metadata.html) with the test SP service. 
