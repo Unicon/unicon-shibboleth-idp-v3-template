@@ -706,43 +706,59 @@ A V2 Installation has been detected. Configuration will be preserved into
         <delete file="${idp.property.file}" failonerror="false" />
 	</target>
 
-	<!--Custom properties and targets -->
-	<property name="etc.dir" value="${basedir}/../etc" />
-	<property name="idp.jettyFragment.path" value="${env.CATALINA_HOME}/conf/Catalina/localhost" />
-	<property name="idp.tomcatFragment.path" value="${env.JETTY_BASE}/webapps/" />
 	
-	<target name="fragment" depends="gettarget, getsource,  jettyFragment, tomcatFragment" description="Preps for deploying the IdP's web fragment file...">
+	<target name="fragment" depends="getsource, gettarget" description="Preps for deploying the IdP's web fragment file...">
         <echo append="true" file="idp_ant.log">target: fragment
 		</echo>
-		<fail if="idp.noprompt">Input needed, silence demanded</fail>
-		<input message="Deploy to Jetty?" addproperty="applyToJetty" defaultvalue="no" />
-		<input message="Deploy to Tomcat?" addproperty="applyToTomcat" defaultvalue="no" />
+		
+		<property name="etc.dir" value="${basedir}/../etc" />
+		
+		<input message="Deploy to Jetty? (y/n)" addproperty="applyToJetty" defaultvalue="n" />
+		<condition property="idp.fragment.jetty">
+                <equals arg1="${applyToJetty}" arg2="y" trim="true"/>
+        </condition>
+
+		<input message="Deploy to Tomcat? (y/n)" addproperty="applyToTomcat" defaultvalue="n" />
+		<condition property="idp.fragment.tomcat">
+            <equals arg1="${applyToTomcat}" arg2="y" trim="true"/>
+        </condition>
+
+		<property environment="env"/>
+        <antcall target="jettyFragment" />
+        <antcall target="tomcatFragment" />
+    
     </target>
 
-	<target name="jettyFragment" if="applyToJetty" description="Deploys the IdP's Jetty web fragment file...">
+	<target name="jettyFragment" if="idp.fragment.jetty" description="Deploys the IdP's Jetty web fragment file...">
         <echo append="true" file="idp_ant.log">target: jettyFragment
 		</echo>
-        <pathToAbsolutePath path="${idp.home}" addproperty="idp.home.path"/>
+
+		<fail unless="env.JETTY_BASE">$JETTY_BASE not set</fail>
+		<property name="idp.jettyFragment.path" value="${env.JETTY_BASE}/webapps/" />
+
         <copy todir="${idp.jettyFragment.path}" preservelastmodified="true" overwrite="true"
               file="${etc.dir}/jetty/idp.xml">
             
             <filterset begintoken="$" endtoken="$">
-                <filter token="IDP_HOME" value="${idp.home.path}"/>
+                <filter token="IDP_HOME" value="${idp.target.dir}"/>
             </filterset>
             
         </copy>
         <replace file="${idp.jettyFragment.path}/idp.xml" token="\" value="/"/>
     </target>
 
-    <target name="tomcatFragment" if="applyToTomcat" description="Deploys the IdP's Tomcat web fragment file...">
+    <target name="tomcatFragment" if="idp.fragment.tomcat" description="Deploys the IdP's Tomcat web fragment file...">
         <echo append="true" file="idp_ant.log">target: tomcatFragment
 		</echo>
-        <pathToAbsolutePath path="${idp.home}" addproperty="idp.home.path"/>
+
+		<fail unless="env.CATALINA_HOME">$CATALINA_HOME not set</fail>
+		<property name="idp.tomcatFragment.path" value="${env.CATALINA_HOME}/conf/Catalina/localhost" />
+        
         <copy todir="${idp.tomcatFragment.path}" preservelastmodified="true" overwrite="true"
               file="${etc.dir}/tomcat/idp.xml">
             
             <filterset begintoken="$" endtoken="$">
-                <filter token="IDP_HOME" value="${idp.home.path}"/>
+                <filter token="IDP_HOME" value="${idp.target.dir}"/>
             </filterset>
             
         </copy>
